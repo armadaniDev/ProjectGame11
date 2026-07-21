@@ -1,10 +1,12 @@
+.vs/
+.vscode/
+
+*.csproj
+*.sln
+.vsconfig
+
 [Ll]ibrary/
 [Tt]emp/
 [Ll]ogs/
 [Oo]bj/
 UserSettings/
-[Bb]uild/
-[Bb]uilds/
-
-.vs/
-.vscode/
