@@ -9,5 +9,6 @@ public class BucketHeadZombie : Enemy
     public override void Serang()
     {
         Debug.Log("Buckethead Gigit");
+        base.Serang();
     }
 }
