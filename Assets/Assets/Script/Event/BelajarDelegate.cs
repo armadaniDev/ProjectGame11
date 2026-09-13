@@ -38,6 +38,6 @@ public class BelajarDelegate : MonoBehaviour
 
     void PanggilWorld()
     {
-        Debug.Log("World!");
+        Debug.Log("World");
     }
 }
