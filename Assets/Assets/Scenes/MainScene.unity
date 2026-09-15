@@ -3971,7 +3971,7 @@ GameObject:
   - component: {fileID: 1674732557}
   - component: {fileID: 1674732556}
   m_Layer: 0
-  m_Name: BossZombie
+  m_Name: BossZombieConfig
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
