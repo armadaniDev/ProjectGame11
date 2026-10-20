@@ -56,6 +56,6 @@ Material:
     m_Floats:
     - _Pulse_Speed: 3
     m_Colors:
-    - _Glow_Color: {r: 0.8792453, g: 0.7693125, b: 0.02488415, a: 0}
+    - _Glow_Color: {r: 8.474191, g: 7.476302, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
