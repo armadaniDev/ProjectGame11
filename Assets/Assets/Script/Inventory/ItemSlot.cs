@@ -47,7 +47,7 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void AddQuantity(int amount)
     {
-        itemQuantity += amount;
+        itemQuantity = Mathf.Min(itemQuantity + amount, MaxStackSize);
         isFull = itemQuantity >= MaxStackSize;
 
         quantityText.text = itemQuantity.ToString();
