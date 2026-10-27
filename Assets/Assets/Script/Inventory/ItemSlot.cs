@@ -16,22 +16,29 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Image itemImage;
     [SerializeField] private int MaxStackSize = 99;
 
-    // Interactive item slot
-    public GameObject Item;
+    //variabel untuk mengaktifkan panel
+    [SerializeField] public GameObject SelectedPanel;
     public bool isItemSelected;
-    private InventoryManager inventoryManager;
+    public InventoryManager inventoryManager;
 
-    public void Awake()
+    //Menampilkan detail panel
+    public ItemDetails ItemDetails => itemDetails;
+    private ItemDetails itemDetails;
+
+    public void Start()
     {
         inventoryManager = FindAnyObjectByType<InventoryManager>();
     }
 
     public void AddItem(ItemDetails item)
     {
+        itemDetails = item;
         itemName = item.ItemName;
         itemIcon = item.ItemIcon;
         AddQuantity(item.Quantity);
     }
+
+    public bool IsEmpty => itemQuantity <= 0;
 
     public bool CanSatckWith(string otherItemName)
     {
@@ -46,13 +53,11 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
         quantityText.text = itemQuantity.ToString();
         quantityText.enabled = true;
         itemImage.sprite = itemIcon;
+        itemImage.enabled = true;
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        // Slot kosong tidak bisa diklik
-        if (itemQuantity == 0) return;
-
         if (eventData.button == PointerEventData.InputButton.Right)
         {
             RightClick();
@@ -70,6 +75,16 @@ public class ItemSlot : MonoBehaviour, IPointerClickHandler
 
     public void LeftClick()
     {
+        // inventoryManager.DeselectAllSlot();
+        // SelectedPanel.SetActive(true);
+        // isItemSelected = true;
         Debug.Log("Left Click");
+
+        if (IsEmpty || inventoryManager == null)
+        {
+            return;
+        }
+
+        inventoryManager.SelectSlot(this);
     }
 }

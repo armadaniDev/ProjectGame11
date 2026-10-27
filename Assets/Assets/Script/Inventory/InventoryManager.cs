@@ -10,6 +10,9 @@ public class InventoryManager : MonoBehaviour, GrabableItem
     private bool InventoryActive;
     public ItemSlot[] itemSlot;
 
+    //tambahkan panel
+    [SerializeField] private ItemDetailsPanel detailsPanel;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -17,6 +20,11 @@ public class InventoryManager : MonoBehaviour, GrabableItem
         InventoryCanvas.SetActive(false);
         inventoryAction = InputSystem.actions.FindAction("Inventory");
         InventoryActive = false;
+
+        if (detailsPanel == null)
+        {
+            Debug.Log("Details Panel not assigned", this);
+        }
     }
 
     // Update is called once per frame
@@ -28,6 +36,7 @@ public class InventoryManager : MonoBehaviour, GrabableItem
             Time.timeScale = 0f;
             Debug.Log("Inventory is active");
             InventoryCanvas.SetActive(true);
+            ShowFirstItem();
         }
         else if (inventoryAction.triggered && InventoryCanvas != null && InventoryActive == true)
         {
@@ -87,7 +96,7 @@ public class InventoryManager : MonoBehaviour, GrabableItem
         // 2. Kalau tidak ada, pakai slot yang benar-benar kosong
         for (int i = 0; i < itemSlot.Length; i++)
         {
-            if (itemSlot[i].itemQuantity == 0)
+            if (itemSlot[i].IsEmpty)
             {
                 itemSlot[i].AddItem(item);
                 return;
@@ -96,5 +105,46 @@ public class InventoryManager : MonoBehaviour, GrabableItem
 
         // 3. Semua slot terisi
         Debug.LogWarning("Inventory is full, '" + item.ItemName + "' was lost.");
+    }
+
+    public void DeselectAllSlot()
+    {
+        foreach (ItemSlot item in itemSlot)
+        {
+            item.isItemSelected = false;
+            item.SelectedPanel.SetActive(false);
+        }
+    }
+
+    public void SelectSlot(ItemSlot item)
+    {
+        DeselectAllSlot();
+        item.SelectedPanel.SetActive(true);
+        item.isItemSelected = true;
+
+        if (detailsPanel != null)
+        {
+            detailsPanel.Show(item.ItemDetails, item.itemQuantity);
+        }
+    }
+
+    public void ShowFirstItem()
+    {
+        if (itemSlot != null)
+        {
+            foreach (ItemSlot item in itemSlot)
+            {
+                if (!item.IsEmpty)
+                {
+                    SelectSlot(item);
+                    return;
+                }
+            }
+        }
+
+        if (detailsPanel != null)
+        {
+            return;
+        }
     }
 }
