@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: ItemDetails 1
   m_EditorClassIdentifier: 
   itemName: coin
-  quantity: 1
+  quantity: 99
   itemIcon: {fileID: 8003260396191338441, guid: efa14516eb3d3a64095e16d87cc2bee8, type: 3}
+  description: 
