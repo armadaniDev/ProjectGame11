@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - coin
+  - gem
   layers:
   - Default
   - TransparentFX
