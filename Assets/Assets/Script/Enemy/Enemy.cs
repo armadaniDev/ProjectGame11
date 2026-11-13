@@ -16,8 +16,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private int damageSerang = 15;
 
     [Header("Pengaturan Patrol")]
-    [SerializeField] private Transform titikA;
-    [SerializeField] private Transform titikB;
+    private Transform titikA;
+    private Transform titikB;
     [SerializeField] private float kecepatanPatroli = 1f;
     [SerializeField] private float waktuIdle = 1.5f;
 
